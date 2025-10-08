@@ -12,6 +12,7 @@ const port = process.env.PORT || 5000;
 app.use(express.json()) // provides a passer ..acts as middle ware
 // Routes
 app.use("/api/contacts",require("./routes/contactRoutes"));
+app.use("/api/contacts",require("./routes/userRoutes"));
 app.use(errorHandler)
 
 // Start server
