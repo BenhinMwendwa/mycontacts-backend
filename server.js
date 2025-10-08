@@ -1,4 +1,5 @@
 const express = require("express");
+const errorHandler = require("./controllers/middleware/errorHandler");
 const dotenv = require("dotenv").config();
 
 const app = express();
@@ -7,10 +8,10 @@ const port = process.env.PORT || 5000;
 // Debug logging
 // console.log("Environment PORT:", process.env.PORT);
 // console.log("Actual port being used:", port);
-
+app.use(express.json()) // provides a passer ..acts as middle ware
 // Routes
 app.use("/api/contacts",require("./routes/contactRoutes"));
-
+app.use(errorHandler)
 
 // Start server
 app.listen(port, () => {
