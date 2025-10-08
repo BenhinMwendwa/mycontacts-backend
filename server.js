@@ -1,7 +1,7 @@
 const express = require("express");
 const errorHandler = require("./controllers/middleware/errorHandler");
 const dotenv = require("dotenv").config();
-const connectDb=  require("./config/dbConnection")
+const connectDb=  require("./config/dbConnection");
 connectDb();
 const app = express();
 const port = process.env.PORT || 5000;
@@ -9,11 +9,11 @@ const port = process.env.PORT || 5000;
 // Debug logging
 // console.log("Environment PORT:", process.env.PORT);
 // console.log("Actual port being used:", port);
-app.use(express.json()) // provides a passer ..acts as middle ware
+app.use(express.json()) ;// provides a passer ..acts as middle ware
 // Routes
 app.use("/api/contacts",require("./routes/contactRoutes"));
-app.use("/api/contacts",require("./routes/userRoutes"));
-app.use(errorHandler)
+app.use("/api/users",require("./routes/userRoutes"));
+app.use(errorHandler);
 
 // Start server
 app.listen(port, () => {
