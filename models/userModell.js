@@ -7,7 +7,17 @@ const userSchema =mongoose.Schema({
     },
     email:{
         type:String,
-        required: [true , "please add the user email"]
+        required: [true , "please add the user email"] ,
         unique:[true, "email address already daken"]
-    }
+    },
+        password:{
+        type:String,
+        required: [true , "please add the user password"] ,
+        
+    },
+},{
+    timestamps:true
+
 })
+
+module.exports=mongoose.model("user",userSchema)
