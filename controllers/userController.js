@@ -40,8 +40,31 @@ const hashedPassword = await bcrypt.hash(password, 10);
 //post/api/users/login
 
 const loginUser= asyncHandler(async(req,res)=>{
-    const{email,password}=req.body:
-    res.json({message:"login user"});
+    const{email,password}=req.body;
+    if (!email || !password){
+         res.status(400);
+        throw new Error("all fields are required");
+         
+    }
+    const user = await User.findOne({email});
+    //compared passw with hashed pass
+
+if(user && (await bcrypt.compare(password, user.password))){
+    const accessToken = jwt.sign({
+        user:{
+            username:user.username,
+            email:user.email,
+            id:user.id,
+
+        },
+    },process.env.ACCESS_TOKEN_SECRET,
+    {expiresIn:"1m"}
+);
+    res.status(200).json({accessToken});
+}else{
+    res.status(401)
+    throw new Error("email or password not valid")
+}
 });
 
 
