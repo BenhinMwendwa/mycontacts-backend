@@ -58,7 +58,7 @@ if(user && (await bcrypt.compare(password, user.password))){
 
         },
     },process.env.ACCESS_TOKEN_SECRET,
-    {expiresIn:"1m"}
+    {expiresIn:"15m"}
 );
     res.status(200).json({accessToken});
 }else{
@@ -75,7 +75,7 @@ if(user && (await bcrypt.compare(password, user.password))){
 
 
 const currentUser= asyncHandler(async(req,res)=>{
-    res.json({message:"current user information"});
+    res.json(req.user);
 });
 
 module.exports={registerUser,loginUser,currentUser}
